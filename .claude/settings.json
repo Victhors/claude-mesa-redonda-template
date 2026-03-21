@@ -16,5 +16,18 @@
       "WebSearch"
     ],
     "deny": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '---JOURNAL (ultimas entradas)---' && tail -30 JOURNAL.md 2>/dev/null && echo '---CHECKLIST (pendentes)---' && grep -n '\\- \\[ \\]' CHECKLIST.md 2>/dev/null | head -5",
+            "statusMessage": "Carregando contexto da Mesa Redonda..."
+          }
+        ]
+      }
+    ]
   }
 }
