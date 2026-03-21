@@ -28,6 +28,21 @@
           }
         ]
       }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "TOOL=$(echo \"$CLAUDE_HOOK_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('tool',''))\" 2>/dev/null); case \"$TOOL\" in Read|Glob|Grep|Bash) CMD=$(echo \"$CLAUDE_HOOK_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); p=d.get('input',{}); print(p.get('command',''))\" 2>/dev/null); case \"$CMD\" in git\\ status*|git\\ log*|git\\ diff*|git\\ branch*|ls*|tree*|wc*) echo '{\"decision\":\"allow\"}';; *) ;; esac;; *) ;; esac",
+            "statusMessage": "Verificando permissao..."
+          }
+        ]
+      }
     ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "BRANCH=$(git branch --show-current 2>/dev/null || echo '?'); PENDING=$(grep -c '\\- \\[ \\]' CHECKLIST.md 2>/dev/null || echo 0); DONE=$(grep -c '\\- \\[x\\]' CHECKLIST.md 2>/dev/null || echo 0); LAST=$(grep '^## \\[' JOURNAL.md 2>/dev/null | tail -1 | sed 's/## \\[\\(.*\\)\\].*/\\1/' || echo '?'); echo \"$BRANCH | checklist: $DONE done, $PENDING pending | journal: $LAST\""
   }
 }
