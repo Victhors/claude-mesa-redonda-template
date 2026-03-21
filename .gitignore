@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code local settings (nao comitar)
+.claude/settings.local.json
+
+# Memory (projeto-especifico)
+.claude/projects/
