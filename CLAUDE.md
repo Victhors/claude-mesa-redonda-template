@@ -121,6 +121,10 @@ projeto/
 - NAO fazer commit de dados processados ou gerados
 - NAO ignorar warnings de seguranca
 
+## Regras de Execução no Terminal (Bash)
+Para evitar bloqueios de segurança e alertas de "newlines" durante a automação:
+1. NUNCA use comentários (iniciados com `#`) dentro do comando Bash.
+
 ---
 
 ## Documentos de Referencia
