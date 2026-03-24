@@ -18,22 +18,5 @@
       "WebSearch"
     ],
     "deny": []
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '---JOURNAL (ultimas entradas)---' && tail -30 JOURNAL.md 2>/dev/null && echo '---CHECKLIST (pendentes)---' && grep -n '\\- \\[ \\]' CHECKLIST.md 2>/dev/null | head -5",
-            "statusMessage": "Carregando contexto da Mesa Redonda..."
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "BRANCH=$(git branch --show-current 2>/dev/null || echo '?'); PENDING=$(grep -c '\\- \\[ \\]' CHECKLIST.md 2>/dev/null || echo 0); DONE=$(grep -c '\\- \\[x\\]' CHECKLIST.md 2>/dev/null || echo 0); LAST=$(grep '^## \\[' JOURNAL.md 2>/dev/null | tail -1 | sed 's/## \\[\\(.*\\)\\].*/\\1/' || echo '?'); echo \"$BRANCH | checklist: $DONE done, $PENDING pending | journal: $LAST\""
   }
 }
