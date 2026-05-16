@@ -105,12 +105,12 @@ Se o debate envolve boas praticas ou estado da arte:
 Agent(subagent_type="pesquisador", prompt="Pesquise boas praticas sobre [TOPICO]. O que a comunidade recomenda? Ha benchmarks? Retorne evidencias com fontes.")
 ```
 
-### 2.3 Dados do Curador
+### 2.3 Dados de outros agentes
 
-Se o debate envolve estado do vault:
+Se o debate tocar em area de outro agente especializado (definido em AGENTS.md):
 
 ```
-Agent(subagent_type="curador-vault", prompt="Faca um diagnostico de [ASPECTO DO VAULT]. Retorne: total de itens, exemplos concretos, metricas.")
+Agent(subagent_type="[agente]", prompt="Colete dados sobre [ASPECTO]. Retorne metricas e exemplos concretos.")
 ```
 
 Regra: Dispare APENAS os agentes cujos dados sao relevantes. Nao dispare todos.
