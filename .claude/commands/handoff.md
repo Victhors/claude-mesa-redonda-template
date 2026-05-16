@@ -1,41 +1,57 @@
-Gere um resumo de handoff para continuidade em proxima sessao.
+---
+description: "Resumo de handoff para continuidade em proxima sessao"
+---
 
-## 1. Analisar Estado Atual
+Gere resumo de handoff para a proxima sessao.
 
-- Leia `JOURNAL.md` (ultimas 10 entradas) — o que foi feito nesta sessao
-- Leia `CHECKLIST.md` — o que esta pendente
-- Leia `DEBATE_LOG.md` — debates abertos sem resolucao
-- Execute `git status` — mudancas nao commitadas
-- Execute `git log --oneline -5` — commits recentes
+## 0. Pre-condicoes
 
-## 2. Gerar Resumo de Handoff
+- `JOURNAL.md` e `CHECKLIST.md` devem existir. Faltando → "Rode `/init` primeiro."
+- Repo deve ser git.
 
-Adicione ao JOURNAL.md:
+## 1. Coleta (paralela)
+
+- `JOURNAL.md` — `tail -n 100`, filtrar entradas com timestamp ISO desta sessao (mesmo dia).
+- `CHECKLIST.md` — itens `[ ]` pendentes; identificar proximo via regra deterministica (prioridade `!!` > dependencias > ordem).
+- `DEBATE_LOG.md` — debates sem `### Resolucao`.
+- `git status --porcelain`, `git rev-parse --abbrev-ref HEAD`, `git log --oneline -5`.
+- `gh pr list --state open --author @me --limit 5` se `gh` disponivel.
+
+## 2. Append no JOURNAL.md (formato fixo)
 
 ```
-## [YYYY-MM-DD HH:MM] HANDOFF — Fim de sessao
+## [YYYY-MM-DDTHH:MM:SSZ] HANDOFF — fim de sessao
 
-### O que foi feito
-- [lista de acoes concluidas nesta sessao]
+### Concluido nesta sessao
+- <acao 1> (commit <hash> | PR #<n> | nenhum)
+- <acao 2>
 
-### O que falta
-- [proximo item do CHECKLIST]
-- [bloqueios ou dependencias]
+### Pendente
+- Proximo item do CHECKLIST: "<titulo>" (lider sugerido: <agente>)
+- Bloqueios: <lista ou "nenhum">
 
 ### Decisoes pendentes
-- [debates abertos, se houver]
+- Debates abertos: <#N "titulo" ou "nenhum">
 
 ### Estado do codigo
-- Branch: [branch atual]
-- Mudancas nao commitadas: [sim/nao — quais]
-- Ultimo commit: [hash + mensagem]
+- Branch: <nome>
+- Nao commitado: <N arquivos> [<lista resumida>]
+- Ultimo commit: <hash> "<msg>"
+- PRs abertos: <#N ou "nenhum">
 
-### Contexto importante para proxima sessao
-- [qualquer informacao que nao esta nos arquivos mas e relevante]
+### Contexto nao-obvio para proxima sessao
+- <so o que NAO esta deduzivel dos arquivos acima; senao escrever "nenhum">
 ```
 
-## 3. Verificar Limpeza
+Regra: a secao "Contexto nao-obvio" deve conter apenas informacao **nao recuperavel** lendo os outros arquivos. Sem repetir o que ja esta no CHECKLIST/JOURNAL/git.
 
-- Ha mudancas nao commitadas que deveriam ser commitadas?
-- Ha arquivos temporarios que deveriam ser removidos?
-- Perguntar ao usuario se quer commitar antes de encerrar.
+## 3. Verificacao de Limpeza (perguntar, nao agir)
+
+Se ha mudancas nao commitadas:
+> "Ha <N> arquivos nao commitados. Quer (1) commitar com Issue+PR, (2) deixar como esta, (3) descartar?"
+
+**Nao commitar nem descartar sem resposta.** Sem chute. Sem `git add -A` automatico.
+
+## 4. Saida ao usuario
+
+Exibir o bloco do JOURNAL recem-escrito + a pergunta de limpeza (se aplicavel). Nao mais que isso.
