@@ -32,6 +32,18 @@ Aplique nesta ordem:
 Se o item escolhido nao tem mapeamento em `AGENTS.md`:
 > Pergunte ao usuario qual agente usar. **Nao chute.**
 
+## 2.5. Confirmacao com o Usuario
+
+Antes de delegar, apresente o plano ao usuario:
+
+> **Proximo item:** "<titulo do item>"
+> **Lider:** <agente>
+> **Revisor:** <agente>
+> **Gate:** <tipo>: <criterio>
+> **Delegar? (s/N)**
+
+Se o usuario pedir ajuste (outro agente, pular item, etc.), respeite. Nao delegar sem resposta explicita.
+
 ## 3. Condicao de Parada
 
 A orquestracao continua iterando ate ocorrer **uma** destas condicoes:

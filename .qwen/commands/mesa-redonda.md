@@ -16,6 +16,18 @@ Antes de qualquer delegacao:
 Consulte `AGENTS.md` para a tabela de mapeamento **Etapa → Agente Lider → Agente Revisor**.
 Cada projeto define seus proprios agentes e mapeamentos em `AGENTS.md`.
 
+## 2.5. Confirmacao com o Usuario
+
+Antes de delegar, apresente o plano ao usuario:
+
+> **Proximo item:** "<titulo do item>"
+> **Lider:** <agente>
+> **Revisor:** <agente>
+> **Gate:** <tipo>: <criterio>
+> **Delegar? (s/N)**
+
+Se o usuario pedir ajuste (outro agente, pular item, etc.), respeite. Nao delegar sem resposta explicita.
+
 ## 3. Como Delegar
 
 Para cada etapa pendente, use a ferramenta Agent com o subagent_type correspondente:

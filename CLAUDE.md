@@ -108,6 +108,29 @@ project-root/
 
 ---
 
+## Interatividade (Pergunte ao Usuario)
+
+Coloque o usuario no loop. Nao faca nada relevante sem consultar antes.
+
+### Quando perguntar
+- Antes de executar acao nao-trivial: apresente o plano e peca confirmacao
+- Multiplas abordagens viaveis: apresente opcoes com tradeoffs, pergunte qual seguir
+- Acao irreversivel (deletar, migrar, refatorar): PECA CONFIRMACAO EXPLICITA
+- Resultado ambiguo ou inesperado: mostre o ocorrido e pergunte como proceder
+- Duas ou mais opcoes igualmente validas: enumere e pergunte
+
+### Como perguntar
+- Seja direto: "Quer que eu [acao]? (s/N)"
+- Para opcoes: "Opcoes: 1) [A], 2) [B]. Qual prefere?"
+- Acoes destrutivas: "ISSO E IRREVERSIVEL. Confirma? (s/N)"
+- Nao chute preferencia do usuario — pergunte.
+
+### Excecoes (pode agir sem perguntar)
+- Ler arquivos (read-only)
+- Rodar scan/status (collect-only)
+- Responder perguntas factuais do usuario
+- Acoes explicitamente delegadas com "faca X"
+
 ## O que NAO Fazer
 
 - NAO instalar dependencias novas sem pedir confirmacao
